@@ -1,0 +1,12 @@
+{
+  "name": "test-application",
+  "version": "1.0.0",
+  "description": "Job for onlyoffice",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["node","nginx","docker","ingress"],
+  "author": "Kopotun A.V",
+  "license": "MIT"
+}

@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  node1:
+    restart: unless-stopped
+    build: .
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    network_mode: host
+
+  node2:
+    restart: unless-stopped
+    build: ./node2
+    volumes:
+      - ./node2/:/usr/src/app
+      - /usr/src/app/node_modules
+    network_mode: host
+
+  nginx_proxy:
+    restart: unless-stopped
+    image: nginx
+    depends_on:
+      - node1
+      - node2
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /usr/share/nginx/html/foo
+      - ./nginx/ssl/nginx.crt:/etc/nginx/certs/nginx.crt
+      - ./nginx/ssl/nginx.key:/etc/nginx/certs/nginx.key
+    network_mode: host
+
